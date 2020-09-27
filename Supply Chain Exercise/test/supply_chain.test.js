@@ -154,4 +154,12 @@ contract('SupplyChain', function(accounts) {
         assert.equal(eventEmitted, true, 'adding an item should emit a Shipped event')
     })
 
+    //Li's additional test
+    it('should allow sku to increment', async () => {
+      await instance.addItem(name, price, {from: alice})
+      await instance.addItem("pencil", price, {from: alice})
+      const result = await instance.fetchItem.call(1)
+     
+      assert.equal(result[1].toNumber(), 1, 'Should have incremented')
+    });
 })
